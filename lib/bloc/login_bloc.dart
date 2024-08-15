@@ -2,23 +2,33 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'login_event.dart';
+
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc()
       : super(const LoginState(password: "", username: "", status: "")) {
-    on<LoginSubmitedEvent>(_onSubmited);
+    on<LoginSubmitedEvent>(_onSubmitted);
+    on<ResetResultValueEvent>(_onResetResultValue);
   }
-  final usernames = ["admin", "user"];
-  final pw = "123456";
 
-  void _onSubmited(LoginSubmitedEvent event, Emitter<LoginState> emit) {
+  final _usernames = ["admin", "user"];
+  final _pw = "123456";
+
+  void _onSubmitted(LoginSubmitedEvent event, Emitter<LoginState> emit) {
     final String username = event.username;
     final String password = event.password;
-    if (usernames.contains(username) && password == pw) {
+    if (_usernames.contains(username) && password == _pw) {
+      print('1');
       emit(state.copyWith(status: "Success"));
     } else {
+      print('2');
       emit(state.copyWith(status: "Fail"));
     }
+  }
+
+  void _onResetResultValue(
+      ResetResultValueEvent event, Emitter<LoginState> emit) {
+    emit(state.copyWith(status: ""));
   }
 }

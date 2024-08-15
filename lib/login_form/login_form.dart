@@ -15,19 +15,34 @@ class _LoginFormState extends State<LoginForm> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> showAlertDialog(BuildContext context, String title, String content) {
-   return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(title: Text(title), content: Text(content));
-        });
+  Future<void> showAlertDialog(
+      BuildContext context, String title, String content) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(
+            title,
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (state.status.isNotEmpty) {
+            if (state.status == "Success") {
+              showAlertDialog(context, "Success", "Success");
+            } else {
+              showAlertDialog(context, "Fail", "Login fail");
+            }
+            context.read<LoginBloc>().add(const ResetResultValueEvent());
+          }
+        });
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
           child: Column(
@@ -48,15 +63,13 @@ class _LoginFormState extends State<LoginForm> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
                   child: StyledButton(
-                      onPressed: () async => {
-                            context.read<LoginBloc>().add(
-                                LoginSubmitedEvent(
-                                    username: _usernameController.text,
-                                    password: _passwordController.text),
-                               ),
-                               await  showAlertDialog(
-                                    context, state.status, state.status)
-                          },
+                      onPressed: () async {
+                        context.read<LoginBloc>().add(
+                              LoginSubmitedEvent(
+                                  username: _usernameController.text,
+                                  password: _passwordController.text),
+                            );
+                      },
                       child: const Text("Login"))),
             ],
           ),

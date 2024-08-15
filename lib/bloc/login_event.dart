@@ -30,3 +30,7 @@ class LoginSubmitedEvent extends LoginEvent {
   final String username;
   final String password;
 }
+
+class ResetResultValueEvent extends LoginEvent {
+   const ResetResultValueEvent();
+}
