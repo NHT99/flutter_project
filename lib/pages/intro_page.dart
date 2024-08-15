@@ -1,5 +1,7 @@
-import 'package:ecommerce/components/button.dart';
+import 'package:ecommerce/config/route_path.dart';
+import 'package:ecommerce/widgets/button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -41,7 +43,9 @@ class IntroPage extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            Button(onTap: () => Navigator.pushNamed(context, '/shop_page'), child: const Icon(Icons.arrow_forward))
+            Button(
+                onTap: () => context.push(RoutePath.shopPage),
+                child: const Icon(Icons.arrow_forward))
           ],
         ),
       ),

@@ -1,5 +1,7 @@
-import 'package:ecommerce/components/custom_list_tile.dart';
+import 'package:ecommerce/config/route_path.dart';
+import 'package:ecommerce/widgets/custom_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -39,8 +41,7 @@ class CustomDrawer extends StatelessWidget {
                   text: "Cart",
                   icon: Icons.shopping_cart,
                   onTap: () => {
-                        Navigator.pop(context),
-                        Navigator.pushNamed(context, '/cart_page'),
+                        context.push(RoutePath.cartPage),
                       }),
             ],
           ),
@@ -52,8 +53,7 @@ class CustomDrawer extends StatelessWidget {
                 text: "Exit",
                 icon: Icons.exit_to_app,
                 onTap: () => {
-                      Navigator.pop(context),
-                      Navigator.pushNamed(context, "/intro_page")
+                      context.go(RoutePath.introPage),
                     }),
           ),
         ],

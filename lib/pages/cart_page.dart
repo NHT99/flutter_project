@@ -1,6 +1,6 @@
-import 'package:ecommerce/components/button.dart';
-import 'package:ecommerce/models/product.dart';
-import 'package:ecommerce/models/shop.dart';
+import 'package:ecommerce/widgets/button.dart';
+import 'package:ecommerce/controllers/product.dart';
+import 'package:ecommerce/controllers/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

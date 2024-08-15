@@ -1,12 +1,11 @@
-import 'package:ecommerce/models/product.dart';
-import 'package:ecommerce/models/shop.dart';
+import 'package:ecommerce/controllers/product.dart';
+import 'package:ecommerce/controllers/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({super.key, required this.product});
   final Product product;
-  @override
   void addToCart(BuildContext context) {
     showDialog(
       context: context,
