@@ -19,10 +19,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final String username = event.username;
     final String password = event.password;
     if (_usernames.contains(username) && password == _pw) {
-      print('1');
       emit(state.copyWith(status: "Success"));
     } else {
-      print('2');
       emit(state.copyWith(status: "Fail"));
     }
   }
